@@ -1,0 +1,135 @@
+data,produto,quantidade,valor
+2026-07-18,Calca Jeans Skinny,2,315.56
+2026-07-18,Calca Jeans Skinny,1,155.63
+2026-07-18,Saia Midi Plissada,4,343.08
+2026-07-18,Jaqueta Corta-Vento,1,171.35
+2026-07-18,Jaqueta Corta-Vento,1,178.7
+2026-07-18,Bermuda Moletom,1,93.79
+2026-07-19,Camiseta Basica Algodao,3,151.65
+2026-07-19,Blusa de Frio Trico,1,100.14
+2026-07-19,Blusa de Frio Trico,1,113.88
+2026-07-19,Camisa Social Slim,1,107.24
+2026-07-19,Blusa de Frio Trico,4,432.76
+2026-07-19,Short Jeans Feminino,2,163.82
+2026-07-20,Bermuda Moletom,4,335.4
+2026-07-20,Saia Midi Plissada,3,248.37
+2026-07-20,Jaqueta Corta-Vento,1,149.42
+2026-07-20,Camisa Social Slim,2,239.84
+2026-07-20,Saia Midi Plissada,4,333.44
+2026-07-20,Camisa Social Slim,3,291.51
+2026-07-20,Jaqueta Corta-Vento,3,557.25
+2026-07-21,Bermuda Moletom,3,259.71
+2026-07-21,Moletom Canguru Unissex,2,250.08
+2026-07-21,Short Jeans Feminino,4,306.24
+2026-07-21,Jaqueta Corta-Vento,4,700.44
+2026-07-22,Camisa Social Slim,1,93.62
+2026-07-22,Jaqueta Corta-Vento,4,713.32
+2026-07-22,Bermuda Moletom,3,252.3
+2026-07-22,Moletom Canguru Unissex,3,436.29
+2026-07-22,Moletom Canguru Unissex,3,423.03
+2026-07-23,Bermuda Moletom,3,232.32
+2026-07-23,Calca Jeans Skinny,2,237.66
+2026-07-23,Moletom Canguru Unissex,2,262.78
+2026-07-23,Camisa Social Slim,3,356.64
+2026-07-23,Moletom Canguru Unissex,3,536.19
+2026-07-24,Bermuda Moletom,2,161.46
+2026-07-24,Bermuda Moletom,1,91.14
+2026-07-24,Vestido Floral Verao,3,276.54
+2026-07-25,Moletom Canguru Unissex,3,485.25
+2026-07-25,Vestido Floral Verao,4,380.12
+2026-07-26,Saia Midi Plissada,3,266.04
+2026-07-26,Camisa Social Slim,3,291.81
+2026-07-27,Bermuda Moletom,4,293.28
+2026-07-27,Calca Jeans Skinny,4,517.6
+2026-07-28,Camiseta Basica Algodao,2,85.76
+2026-07-28,Saia Midi Plissada,3,219.93
+2026-07-28,Jaqueta Corta-Vento,1,168.97
+2026-07-28,Short Jeans Feminino,2,166.34
+2026-07-28,Short Jeans Feminino,4,348.64
+2026-07-28,Bermuda Moletom,4,316.24
+2026-07-29,Camiseta Basica Algodao,1,58.85
+2026-07-29,Jaqueta Corta-Vento,2,296.86
+2026-07-29,Calca Jeans Skinny,2,228.58
+2026-07-29,Moletom Canguru Unissex,1,129.29
+2026-07-29,Short Jeans Feminino,4,322.32
+2026-07-29,Camisa Social Slim,3,273.63
+2026-07-30,Bermuda Moletom,4,288.16
+2026-07-30,Jaqueta Corta-Vento,3,555.15
+2026-07-30,Saia Midi Plissada,2,173.82
+2026-07-30,Moletom Canguru Unissex,2,317.52
+2026-07-31,Vestido Floral Verao,1,92.88
+2026-07-31,Bermuda Moletom,3,249.21
+2026-07-31,Camisa Social Slim,3,353.67
+2026-07-31,Bermuda Moletom,4,332.12
+2026-08-01,Camiseta Basica Algodao,4,218.36
+2026-08-01,Saia Midi Plissada,3,212.79
+2026-08-01,Jaqueta Corta-Vento,1,199.87
+2026-08-01,Bermuda Moletom,1,92.79
+2026-08-01,Vestido Floral Verao,4,463.4
+2026-08-01,Camisa Social Slim,3,291.48
+2026-08-02,Short Jeans Feminino,4,355.88
+2026-08-02,Camisa Social Slim,3,318.69
+2026-08-02,Blusa de Frio Trico,1,114.21
+2026-08-02,Blusa de Frio Trico,4,430.6
+2026-08-02,Bermuda Moletom,4,377.24
+2026-08-02,Moletom Canguru Unissex,1,147.19
+2026-08-03,Bermuda Moletom,3,220.14
+2026-08-03,Short Jeans Feminino,1,79.63
+2026-08-03,Moletom Canguru Unissex,4,578.76
+2026-08-03,Jaqueta Corta-Vento,3,520.44
+2026-08-04,Camisa Social Slim,1,98.04
+2026-08-04,Moletom Canguru Unissex,2,351.12
+2026-08-04,Camisa Social Slim,4,379.04
+2026-08-04,Saia Midi Plissada,2,196.58
+2026-08-04,Bermuda Moletom,1,86.47
+2026-08-05,Jaqueta Corta-Vento,1,162.2
+2026-08-05,Calca Jeans Skinny,2,259.6
+2026-08-06,Bermuda Moletom,3,247.08
+2026-08-06,Camisa Social Slim,4,398.6
+2026-08-06,Moletom Canguru Unissex,2,285.84
+2026-08-06,Saia Midi Plissada,2,208.92
+2026-08-06,Bermuda Moletom,4,320.4
+2026-08-06,Moletom Canguru Unissex,3,507.39
+2026-08-06,Bermuda Moletom,3,285.06
+2026-08-07,Camisa Social Slim,2,215.52
+2026-08-07,Camisa Social Slim,3,309.6
+2026-08-07,Moletom Canguru Unissex,4,588.88
+2026-08-07,Blusa de Frio Trico,2,238.26
+2026-08-07,Jaqueta Corta-Vento,4,585.0
+2026-08-07,Short Jeans Feminino,1,69.45
+2026-08-08,Short Jeans Feminino,4,358.2
+2026-08-08,Vestido Floral Verao,4,552.56
+2026-08-08,Vestido Floral Verao,3,400.17
+2026-08-08,Camisa Social Slim,1,110.94
+2026-08-08,Camisa Social Slim,1,118.8
+2026-08-09,Vestido Floral Verao,1,113.37
+2026-08-09,Bermuda Moletom,3,265.8
+2026-08-09,Short Jeans Feminino,1,85.45
+2026-08-09,Moletom Canguru Unissex,4,708.6
+2026-08-09,Camisa Social Slim,1,114.6
+2026-08-10,Bermuda Moletom,2,184.6
+2026-08-10,Short Jeans Feminino,1,82.71
+2026-08-10,Calca Jeans Skinny,4,439.52
+2026-08-11,Camiseta Basica Algodao,1,46.39
+2026-08-11,Camiseta Basica Algodao,3,141.21
+2026-08-11,Short Jeans Feminino,2,134.46
+2026-08-11,Short Jeans Feminino,2,130.0
+2026-08-12,Saia Midi Plissada,4,378.76
+2026-08-12,Jaqueta Corta-Vento,4,775.2
+2026-08-13,Jaqueta Corta-Vento,4,698.2
+2026-08-13,Camisa Social Slim,3,349.71
+2026-08-13,Camisa Social Slim,3,351.0
+2026-08-14,Calca Jeans Skinny,4,626.44
+2026-08-14,Saia Midi Plissada,3,286.38
+2026-08-14,Short Jeans Feminino,3,220.83
+2026-08-15,Jaqueta Corta-Vento,4,758.52
+2026-08-15,Calca Jeans Skinny,2,245.56
+2026-08-15,Blusa de Frio Trico,3,358.83
+2026-08-15,Bermuda Moletom,1,99.24
+2026-08-16,Short Jeans Feminino,3,180.42
+2026-08-16,Camiseta Basica Algodao,4,226.24
+2026-08-16,Bermuda Moletom,2,176.22
+2026-08-16,Blusa de Frio Trico,2,210.72
+2026-08-16,Saia Midi Plissada,3,291.03
+2026-08-16,Vestido Floral Verao,1,135.07
+2026-08-16,Camiseta Basica Algodao,3,167.01
