@@ -1,0 +1,14 @@
+# Variáveis de ambiente (credenciais reais)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Sistema
+.DS_Store
+
+# Arquivo gerado automaticamente pelo pipeline (opcional manter no repo como exemplo)
+# dados/vendas_consolidadas.csv
