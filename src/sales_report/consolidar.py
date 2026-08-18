@@ -1,17 +1,13 @@
 """
-consolidar_vendas.py
-
-Responsável por ler os arquivos de vendas de diferentes canais (Shopify e
-Mercado Livre), unificá-los em um único dataframe e calcular as métricas
-principais do relatório: faturamento total, quantidade total vendida,
-ticket médio e o resumo consolidado por dia.
+Leitura, consolidação e cálculo de métricas de vendas multi-canal.
 """
 
 from pathlib import Path
+from typing import Dict
+
 import pandas as pd
 
-# Caminhos padrão dos arquivos de dados (podem ser sobrescritos nos testes)
-PASTA_DADOS = Path(__file__).resolve().parent.parent / "dados"
+PASTA_DADOS = Path(__file__).resolve().parents[2] / "dados"
 ARQUIVO_SHOPIFY = PASTA_DADOS / "vendas_shopify.csv"
 ARQUIVO_MERCADO_LIVRE = PASTA_DADOS / "vendas_mercado_livre.csv"
 ARQUIVO_SAIDA = PASTA_DADOS / "vendas_consolidadas.csv"
@@ -24,8 +20,10 @@ def ler_vendas(caminho_csv: Path, canal: str) -> pd.DataFrame:
     return df
 
 
-def consolidar_canais(caminho_shopify: Path = ARQUIVO_SHOPIFY,
-                       caminho_mercado_livre: Path = ARQUIVO_MERCADO_LIVRE) -> pd.DataFrame:
+def consolidar_canais(
+    caminho_shopify: Path = ARQUIVO_SHOPIFY,
+    caminho_mercado_livre: Path = ARQUIVO_MERCADO_LIVRE,
+) -> pd.DataFrame:
     """Une os dados de todos os canais em um único dataframe."""
     df_shopify = ler_vendas(caminho_shopify, "Shopify")
     df_mercado_livre = ler_vendas(caminho_mercado_livre, "Mercado Livre")
@@ -35,8 +33,8 @@ def consolidar_canais(caminho_shopify: Path = ARQUIVO_SHOPIFY,
     return df_consolidado
 
 
-def calcular_metricas_gerais(df: pd.DataFrame) -> dict:
-    """Calcula as métricas gerais do período: faturamento, quantidade e ticket médio."""
+def calcular_metricas_gerais(df: pd.DataFrame) -> Dict:
+    """Calcula as métricas gerais do período."""
     faturamento_total = round(df["valor"].sum(), 2)
     quantidade_total = int(df["quantidade"].sum())
     numero_pedidos = len(df)
@@ -51,7 +49,7 @@ def calcular_metricas_gerais(df: pd.DataFrame) -> dict:
 
 
 def gerar_resumo_diario(df: pd.DataFrame) -> pd.DataFrame:
-    """Agrupa os dados por dia, calculando faturamento, quantidade e ticket médio diários."""
+    """Agrupa os dados por dia."""
     resumo = (
         df.groupby(df["data"].dt.date)
         .agg(
@@ -65,24 +63,9 @@ def gerar_resumo_diario(df: pd.DataFrame) -> pd.DataFrame:
 
     resumo["ticket_medio"] = (resumo["faturamento"] / resumo["numero_pedidos"]).round(2)
     resumo["faturamento"] = resumo["faturamento"].round(2)
-
     return resumo
 
 
 def salvar_resumo(resumo: pd.DataFrame, caminho_saida: Path = ARQUIVO_SAIDA) -> None:
-    """Salva o resumo diário consolidado em um CSV."""
+    """Salva o resumo diário consolidado em CSV."""
     resumo.to_csv(caminho_saida, index=False, encoding="utf-8")
-
-
-if __name__ == "__main__":
-    df = consolidar_canais()
-    metricas = calcular_metricas_gerais(df)
-    resumo_diario = gerar_resumo_diario(df)
-    salvar_resumo(resumo_diario)
-
-    print("Relatório consolidado gerado com sucesso!\n")
-    print(f"Faturamento total: R$ {metricas['faturamento_total']:.2f}")
-    print(f"Quantidade total de produtos vendidos: {metricas['quantidade_total']}")
-    print(f"Número de pedidos: {metricas['numero_pedidos']}")
-    print(f"Ticket médio: R$ {metricas['ticket_medio']:.2f}")
-    print(f"\nArquivo salvo em: {ARQUIVO_SAIDA}")

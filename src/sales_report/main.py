@@ -1,28 +1,23 @@
 """
-main.py
-
-Ponto de entrada da automação. Executa o pipeline completo:
-1. Lê e consolida os dados de vendas (Shopify + Mercado Livre)
-2. Calcula as métricas gerais do período
-3. Gera o CSV consolidado por dia
-4. Envia o resumo para o Notion (opcional, se configurado)
+Ponto de entrada da automação de relatório de vendas.
 
 Uso:
-    python scripts/main.py
-    python scripts/main.py --enviar-notion
+    python -m sales_report.main
+    python -m sales_report.main --enviar-notion
+    sales-report --enviar-notion
 """
 
 import argparse
 from datetime import datetime
 
-from consolidar_vendas import (
+from sales_report.consolidar import (
     consolidar_canais,
     calcular_metricas_gerais,
     gerar_resumo_diario,
     salvar_resumo,
     ARQUIVO_SAIDA,
 )
-from notion_integration import enviar_para_notion
+from sales_report.notion import enviar_para_notion
 
 
 def executar_pipeline(enviar_notion: bool = False) -> None:
@@ -50,13 +45,18 @@ def executar_pipeline(enviar_notion: bool = False) -> None:
         enviar_para_notion(metricas, data_referencia)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Automação de relatório de vendas para e-commerce.")
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Automação de relatório de vendas para e-commerce."
+    )
     parser.add_argument(
         "--enviar-notion",
         action="store_true",
         help="Envia o resumo consolidado para o Notion após gerar o relatório.",
     )
     args = parser.parse_args()
-
     executar_pipeline(enviar_notion=args.enviar_notion)
+
+
+if __name__ == "__main__":
+    main()

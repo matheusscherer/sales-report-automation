@@ -1,14 +1,25 @@
-# Variáveis de ambiente (credenciais reais)
+# Environment / secrets
 .env
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+.Python
+build/
+dist/
+*.egg-info/
 .venv/
 venv/
 
-# Sistema
+# IDE / OS
+.idea/
+.vscode/
 .DS_Store
 
-# Arquivo gerado automaticamente pelo pipeline (opcional manter no repo como exemplo)
-# dados/vendas_consolidadas.csv
+# Generated
+dados/vendas_consolidadas.csv
+
+# Tests
+.coverage
+htmlcov/
+.pytest_cache/
