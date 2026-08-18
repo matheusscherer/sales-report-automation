@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sales-report-automation"
+version = "0.1.0"
+description = "Automação em Python para consolidar vendas multi-canal (Shopify + Mercado Livre) e publicar relatório no Notion"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Matheus Scherer", email = "contatomatheusscherer@gmail.com" }]
+keywords = ["python", "automacao", "pandas", "notion", "ecommerce", "relatorio"]
+dependencies = [
+    "pandas>=2.0",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+
+[project.scripts]
+sales-report = "sales_report.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

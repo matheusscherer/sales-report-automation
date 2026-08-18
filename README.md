@@ -1,161 +1,102 @@
-# 📊 Automação de Relatório de Vendas para E-commerce
+# Sales Report Automation
 
-Automação em Python que consolida dados de vendas de múltiplos canais de
-e-commerce (Shopify e Mercado Livre), calcula as métricas principais do
-negócio e publica automaticamente um resumo diário em uma página do
-Notion — eliminando o trabalho manual de exportar planilhas e montar
-relatórios todos os dias.
+Automação em Python que consolida dados de vendas de múltiplos canais de e-commerce (**Shopify** e **Mercado Livre**), calcula métricas principais e publica automaticamente um resumo diário no **Notion**.
 
-Projeto criado para fins de portfólio e prospecção de clientes de
-automação de processos (RPA / integração de dados).
+Projeto de portfólio focado em automação de processos, integração de dados e APIs.
 
 ---
 
-## 🧩 O problema
+## O que faz
 
-Lojistas que vendem em mais de um canal (site próprio via Shopify,
-marketplaces como Mercado Livre, etc.) normalmente precisam:
-
-- Baixar relatórios separados de cada plataforma;
-- Consolidar tudo manualmente em uma planilha;
-- Calcular faturamento, ticket médio e volume de vendas "na mão";
-- Repetir esse processo todos os dias ou todas as semanas.
-
-Isso consome tempo, é sujeito a erro humano e atrasa a tomada de decisão.
-
-## ✅ A solução
-
-Este projeto automatiza esse fluxo de ponta a ponta:
-
-1. **Lê** os arquivos de vendas exportados de cada canal (CSV);
-2. **Consolida** tudo em uma única base de dados;
-3. **Calcula** faturamento total, quantidade de produtos vendidos e
-   ticket médio, além de um resumo dia a dia;
-4. **Publica** automaticamente o resumo em uma página/database do
-   Notion, deixando o relatório sempre atualizado e acessível para o
-   time, sem intervenção manual.
-
-O mesmo pipeline pode ser adaptado para rodar todos os dias via
-agendador (cron, Task Scheduler, GitHub Actions, etc.), mantendo o
-Notion sempre atualizado sem nenhuma ação manual.
+1. Lê CSVs de vendas de cada canal
+2. Consolida em uma única base
+3. Calcula faturamento, quantidade vendida, número de pedidos e ticket médio
+4. Gera resumo diário em CSV
+5. (Opcional) Publica o resumo no Notion via API
 
 ---
 
-## 🛠️ Tecnologias usadas
+## Estrutura
 
-| Tecnologia       | Uso                                                |
-|------------------|-----------------------------------------------------|
-| Python 3.10+     | Linguagem principal da automação                    |
-| Pandas           | Leitura, consolidação e cálculo das métricas        |
-| Requests         | Requisições HTTP para a API do Notion               |
-| python-dotenv    | Gerenciamento seguro de variáveis de ambiente       |
-| Notion API       | Publicação automática do relatório                  |
-
----
-
-## 📁 Estrutura do projetosales-report-automation/
+```text
+sales-report-automation/
+├── src/
+│   └── sales_report/
+│       ├── __init__.py
+│       ├── consolidar.py
+│       ├── notion.py
+│       └── main.py
 ├── dados/
-│   ├── vendas_shopify.csv          # dados fictícios (30 dias)
-│   ├── vendas_mercado_livre.csv    # dados fictícios (30 dias)
-│   └── vendas_consolidadas.csv     # gerado automaticamente pelo script
-├── scripts/
-│   ├── consolidar_vendas.py        # leitura, consolidação e cálculo de métricas
-│   ├── notion_integration.py       # integração com a API do Notion
-│   └── main.py                     # ponto de entrada da automação
+│   ├── vendas_shopify.csv
+│   └── vendas_mercado_livre.csv
+├── tests/
 ├── docs/
-│   └── exemplo_saida.md            # exemplo de saída no console, CSV e Notion
-├── requirements.txt
 ├── .env.example
-├── .gitignore
-└── README.md
-Passo 1 — Criar a integração
+├── pyproject.toml
+├── README.md
+└── LICENSE
+```
 
-	1.	Acesse notion.so/my-integrations;
-	2.	Clique em “New integration”;
-	3.	Dê um nome (ex: Automação de Vendas) e selecione o workspace;
-	4.	Copie o “Internal Integration Token” gerado — esse é o seu NOTION_TOKEN.
+---
 
-Passo 2 — Criar o database no Notion
+## Instalação
 
-	1.	Crie uma página no Notion e adicione um database (tabela) com as colunas abaixo (os nomes devem ser exatamente estes):
+```bash
+git clone https://github.com/matheusscherer/sales-report-automation.git
+cd sales-report-automation
 
-Nome da coluna	Tipo
-Nome	Title
-Data	Date
-Faturamento Total	Number
-Quantidade Vendida	Number
-Ticket Médio	Number
+python -m venv .venv
+source .venv/bin/activate
 
-	2.	Clique em “Share” no canto superior direito da página do database e conecte a integração criada no Passo 1 (ela precisa ter acesso explícito ao database para poder escrever nele).
-	3.	Copie o ID do database: é o trecho de 32 caracteres presente na URL da página, por exemplo:
-https://www.notion.so/workspace/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d?v=...
-(o database_id é essa sequência de 32 caracteres logo depois de /workspace/)
+pip install -e ".[dev]"
+```
 
-Passo 3 — Configurar as variáveis de ambiente
+---
 
-	1.	Copie o arquivo de exemplo:
-   cp .env.example .env
-2. Preencha o arquivo .env com seus dados reais:
+## Como usar
 
+```bash
+# Apenas consolida e gera o relatório
+python -m sales_report.main
+# ou
+sales-report
+
+# Com envio para o Notion
+sales-report --enviar-notion
+```
+
+### Configuração do Notion (opcional)
+
+1. Crie uma integração em [notion.so/my-integrations](https://www.notion.so/my-integrations)
+2. Crie um database com as colunas: `Nome` (Title), `Data` (Date), `Faturamento Total` (Number), `Quantidade Vendida` (Number), `Ticket Médio` (Number)
+3. Conecte a integração ao database
+4. Copie `.env.example` para `.env` e preencha:
+
+```env
 NOTION_TOKEN=seu_token_aqui
 NOTION_DATABASE_ID=seu_database_id_aqui
-
-3. Nunca suba o arquivo .env (com valores reais) para o GitHub — ele já está listado no .gitignore.
-
-### Passo 4 — Rodar com a integração ativa
-
-python scripts/main.py --enviar-notion
-
-Se tudo estiver configurado corretamente, uma nova página (registro) será criada no seu database do Notion com o resumo do dia.
+```
 
 ---
 
-## 📈 Exemplo de saída
+## Testes
 
-No console:
-
-===== RELATÓRIO DE VENDAS =====
-Faturamento total.......: R$ 87899.55
-Quantidade vendida......: 785 unidades
-Número de pedidos.......: 318
-Ticket médio.............: R$ 276.41
-Arquivo consolidado.....: dados/vendas_consolidadas.csv
-================================
-
-No CSV gerado (dados/vendas_consolidadas.csv):
-
-| data       | faturamento | quantidade_vendida | numero_pedidos | ticket_medio |
-|------------|-------------|---------------------|-----------------|----------------|
-| 2026-07-18 | 2975.21     | 25                  | 14              | 212.52         |
-| 2026-07-19 | 2193.46     | 22                  | 11              | 199.41         |
-| 2026-07-20 | 3774.06     | 34                  | 13              | 290.31         |
-
-Veja mais detalhes, incluindo o exemplo de registro criado no Notion, em docs/exemplo_saida.md.
+```bash
+pytest -v
+```
 
 ---
 
-## 🔮 Possíveis melhorias futuras
+## Stack
 
-- Suporte a mais canais de venda (Amazon, Shopee, loja física via PDV);
-- Agendamento automático via GitHub Actions ou cron, sem intervenção manual;
-- Envio de alertas por e-mail/WhatsApp quando o faturamento diário ficar abaixo de uma meta configurável;
-- Dashboard interativo (Streamlit) para visualizar as métricas históricas além do Notion;
-- Testes automatizados (pytest) para as funções de consolidação e cálculo;
-- Suporte a múltiplas lojas/clientes no mesmo pipeline (multi-tenant);
-- Deploy como serviço containerizado (Docker) rodando em produção.
+- Python 3.10+
+- Pandas
+- Requests + Notion API
+- python-dotenv
+- pytest + GitHub Actions
 
 ---
 
-## 📄 Licença
+**Matheus Scherer** · [github.com/matheusscherer](https://github.com/matheusscherer)
 
-Este é um projeto de portfólio, livre para uso e adaptação como referência de aprendizado.
-
----
-
-Desenvolvido por Matheus Scherer — Analista de Dados e Automação Júnior
-GitHub: https://github.com/matheusscherer
-
-   
-
-
-
+MIT License
