@@ -1,22 +1,24 @@
-# Relatório de vendas — dois CSVs viram um resumo
+# Sales Report Automation
 
-Lê dois CSVs de canais, concatena, calcula faturamento / quantidade / pedidos / ticket médio, grava um CSV consolidado. Opcional: uma linha no Notion (`--enviar-notion`).
+Two sales CSVs become one clean summary.
 
-Os arquivos de exemplo se chamam `vendas_shopify.csv` e `vendas_mercado_livre.csv`. **São CSVs no mesmo schema** (`data`, `valor`, `quantidade`). Não há API da Shopify nem do Mercado Livre neste repositório.
+Reads two channel CSVs, concatenates them, calculates revenue / quantity / orders / average ticket, and writes a consolidated CSV. Optional: one Notion row (`--enviar-notion`).
 
-**Autor:** [Matheus Scherer](https://github.com/matheusscherer) · Porto Alegre
+Example files are named `vendas_shopify.csv` and `vendas_mercado_livre.csv`. **They are CSVs with the same schema** (`data`, `valor`, `quantidade`). There is no Shopify or Mercado Livre API in this repository.
+
+**Author:** [Matheus Scherer](https://github.com/matheusscherer) · Porto Alegre, Brazil
 
 ---
 
-## O que faz
+## What it does
 
 | | |
 |---|---|
-| **Entra** | Dois CSVs com colunas `data`, `valor`, `quantidade` |
-| **Sai** | `dados/vendas_consolidadas.csv` + números no terminal |
-| **Opcional** | POST na API do Notion, só com flag e `.env` |
+| **Input** | Two CSVs with columns `data`, `valor`, `quantidade` |
+| **Output** | `dados/vendas_consolidadas.csv` + numbers in the terminal |
+| **Optional** | POST to Notion API, only with flag and `.env` |
 
-Nada publica sozinho. Sem `--enviar-notion`, só gera arquivo.
+Nothing publishes by itself. Without `--enviar-notion`, it only generates a file.
 
 ---
 
@@ -26,7 +28,7 @@ Python 3.10+ · Pandas · Requests · python-dotenv · pytest · GitHub Actions 
 
 ---
 
-## Como executar
+## How to run
 
 ```bash
 git clone https://github.com/matheusscherer/sales-report-automation.git
@@ -35,39 +37,39 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 
 python -m sales_report.main
-python -m sales_report.main --enviar-notion   # só com .env
+python -m sales_report.main --enviar-notion   # only with .env
 pytest -v
 ```
 
-Troca os CSVs. Mantém as colunas. O relatório sai.
+Replace the CSVs. Keep the columns. The report comes out.
 
 ---
 
-## Evidência / demo
+## Evidence / demo
 
-- Dados de exemplo em `dados/`
-- Testes: métricas, resumo diário, base vazia (ticket = 0), `parametrize`
-- CI verde em Python 3.10 / 3.11 / 3.12
-- Notion: integração real via API, **opt-in**. Sem token, o script não envia.
+- Example data in `dados/`
+- Tests: metrics, daily summary, empty base (ticket = 0), `parametrize`
+- Green CI on Python 3.10 / 3.11 / 3.12
+- Notion: real API integration, **opt-in**. Without token, the script does not send.
 
-Não há print de cliente. Não há hora economizada medida.
-
----
-
-## Limitações
-
-- Os dois canais precisam do **mesmo schema**. Não mapeia export real da Shopify vs. Mercado Livre.
-- Notion cria uma página por execução — não é idempotente.
-- Sem agendamento. Roda quando você roda.
+No client screenshots. No measured hours saved.
 
 ---
 
-## O que isto NÃO é
+## Limitations
 
-- Não é integração com API da Shopify ou do Mercado Livre.
-- Não é ERP, fiscal, dashboard em tempo real, nem receita 24/7.
-- Não é case de cliente. É exemplo com CSV.
+- Both channels need the **same schema**. It does not map real Shopify vs Mercado Livre exports.
+- Notion creates one page per run — not idempotent.
+- No scheduling. Runs when you run it.
 
 ---
 
-Python 3.10+ · Pandas · Requests (Notion) · pytest · MIT
+## What this is NOT
+
+- Not an integration with Shopify or Mercado Livre APIs.
+- Not ERP, tax, real-time dashboard, or 24/7 revenue tracking.
+- Not a client case. It is an example with CSV.
+
+---
+
+[LinkedIn](https://linkedin.com/in/scherermatheus) · [Site](https://mtsch-site.vercel.app) · [GitHub](https://github.com/matheusscherer)
