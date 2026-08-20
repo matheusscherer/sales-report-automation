@@ -1,26 +1,32 @@
-# Automação de relatório — exemplo vendas
+# Relatório de vendas — dois CSVs viram um resumo
 
-Dois CSVs de canais diferentes → um resumo (faturamento, pedidos, ticket) → arquivo + opcional no Notion.
+Lê dois CSVs de canais, concatena, calcula faturamento / quantidade / pedidos / ticket médio, grava um CSV consolidado. Opcional: uma linha no Notion (`--enviar-notion`).
 
-O exemplo usa Shopify e Mercado Livre. O motor é o mesmo pra qualquer operação que fecha o dia juntando planilha na mão (loja, clínica, escritório).
+Os arquivos de exemplo se chamam `vendas_shopify.csv` e `vendas_mercado_livre.csv`. **São CSVs no mesmo schema** (`data`, `valor`, `quantidade`). Não há API da Shopify nem do Mercado Livre neste repositório.
 
-**Autor:** [Matheus Scherer](https://github.com/matheusscherer) — automação de processos com Python.
+**Autor:** [Matheus Scherer](https://github.com/matheusscherer) · Porto Alegre
 
 ---
 
-## Processo
+## O que faz
 
 | | |
 |---|---|
-| **Entra** | `dados/vendas_shopify.csv` e `dados/vendas_mercado_livre.csv` (colunas `data`, `valor`, `quantidade`) |
-| **Sai** | `dados/vendas_consolidadas.csv` + números no terminal (faturamento, qtd, pedidos, ticket médio) |
-| **Opcional** | a mesma linha no Notion (`--enviar-notion`) |
+| **Entra** | Dois CSVs com colunas `data`, `valor`, `quantidade` |
+| **Sai** | `dados/vendas_consolidadas.csv` + números no terminal |
+| **Opcional** | POST na API do Notion, só com flag e `.env` |
 
-Nada publica sozinho. Sem a flag, só gera o arquivo.
+Nada publica sozinho. Sem `--enviar-notion`, só gera arquivo.
 
 ---
 
-## Como roda
+## Stack
+
+Python 3.10+ · Pandas · Requests · python-dotenv · pytest · GitHub Actions · MIT
+
+---
+
+## Como executar
 
 ```bash
 git clone https://github.com/matheusscherer/sales-report-automation.git
@@ -29,7 +35,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 
 python -m sales_report.main
-python -m sales_report.main --enviar-notion   # só se tiver .env
+python -m sales_report.main --enviar-notion   # só com .env
 pytest -v
 ```
 
@@ -37,17 +43,31 @@ Troca os CSVs. Mantém as colunas. O relatório sai.
 
 ---
 
-## Notion (opcional)
+## Evidência / demo
 
-Copia `.env.example` → `.env`:
+- Dados de exemplo em `dados/`
+- Testes: métricas, resumo diário, base vazia (ticket = 0), `parametrize`
+- CI verde em Python 3.10 / 3.11 / 3.12
+- Notion: integração real via API, **opt-in**. Sem token, o script não envia.
 
-```env
-NOTION_TOKEN=
-NOTION_DATABASE_ID=
-```
-
-Database com: `Nome` (title), `Data` (date), `Faturamento Total` / `Quantidade Vendida` / `Ticket Médio` (number). Integração conectada no database.
+Não há print de cliente. Não há hora economizada medida.
 
 ---
 
-Python 3.10+ · Pandas · Requests (Notion) · pytest + GitHub Actions · MIT
+## Limitações
+
+- Os dois canais precisam do **mesmo schema**. Não mapeia export real da Shopify vs. Mercado Livre.
+- Notion cria uma página por execução — não é idempotente.
+- Sem agendamento. Roda quando você roda.
+
+---
+
+## O que isto NÃO é
+
+- Não é integração com API da Shopify ou do Mercado Livre.
+- Não é ERP, fiscal, dashboard em tempo real, nem receita 24/7.
+- Não é case de cliente. É exemplo com CSV.
+
+---
+
+Python 3.10+ · Pandas · Requests (Notion) · pytest · MIT
